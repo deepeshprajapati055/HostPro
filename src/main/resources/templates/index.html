@@ -101,7 +101,17 @@
 									<span th:text="${r.status}"></span>
 								</td>
 								<td><a th:href="@{/updateRoom/{id}(id=${r.id})}" th:disabled="${r.status == 'Occupied'}"><button class="btn btn-outline-warning" th:attr="disabled=${r.status == 'Occupied'}">Update</button></a></td>
-								<td><a th:href="@{'/remove/' + ${r.id}}" th:disabled="${r.status == 'Occupied'}"><button class="btn btn-outline-danger" th:attr="disabled=${r.status == 'Occupied'}">Delete</button></a></td>
+								<td>
+								    <a th:href="@{'/remove/' + ${r.id}}" 
+								       th:disabled="${r.status == 'Occupied'}" 
+								       onclick="return confirm('Are you sure you watn to delete this room');">
+								        <button 
+								            class="btn btn-outline-danger"
+								            th:attr="disabled=${r.status == 'Occupied'}">
+								    		Delete
+								        </button>
+								    </a>
+								</td>
 							</tr>
 						</tbody>
 					</table>
