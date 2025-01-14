@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Home-Page</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+	
+<style>
+	body{
+		background: #2C3E50;
+		background: -webkit-linear-gradient(to right, #4CA1AF, #2C3E50);
+		background: linear-gradient(to right, #4CA1AF, #2C3E50);
+	}
+</style>
+</head>
+<body>
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="fw-bold text-black">Hotel Management System.</h1>
+				<p class="fw-bold">Welcome to Hotel Management System :)</p>
+				<a href="/addrooms"><button class="btn btn-info mt-2 mb-2">Add-Rooms</button></a>
+				<a href="/"><button class="btn btn-info mt-2 mb-2">Home</button></a>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="text-center text-success fw-bold" th:text="${message}"></h3>
+						<h3 class="text-center text-danger fw-bold" th:text="${error}"></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="container">
+		<h1 class="text-black fw-bold">Room's Details</h1>
+			    <div class="row mt-3">
+			        <div class="col-md-3">
+			            <div class="card bg-info text-white">
+			                <div class="card-body">
+			                    <h4 class="">Total Rooms</h4>
+			                    <h2 th:text="${totalRooms}"></h2>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-3">
+			            <div class="card bg-success text-white">
+			                <div class="card-body">
+			                    <h4>Occupied Rooms</h4>
+			                    <h2 th:text="${occupiedRooms}"></h2>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-3">
+			            <div class="card bg-danger text-white">
+			                <div class="card-body">
+			                    <h4>Not-Occupied</h4>
+			                    <h2 th:text="${notOccupiedRooms}"></h2>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="col-md-3">
+			            <div class="card bg-secondary text-white">
+			                <div class="card-body">
+			                    <h4>Under-Maintenance</h4>
+			                    <h2 th:text="${underMaintenanceRooms}"></h2>
+			                </div>
+			            </div>
+			        </div>
+			       </div>
+					<table class="table table-dark table-striped table-responsive mt-3">
+						<thead>
+							<tr>
+								<th scope="col">ROOM NO</th>
+								<th scope="col">AVAILABILITY</th>
+								<th scope="col">ROOM SIZE</th>
+								<th scope="col">PRICE PER-NIGHT</th>
+								<th scope="col">ROOM TYPE</th>
+								<th scope="col">FLOOR NO</th>
+								<th scope="col" class="fw-bold">STATUS</th>
+								<th scope="col" colspan=2>ACTION</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="r:${rooms}">
+								<td th:text="${r.roomno}"></td>
+								<td th:style="'color: ' + (${r.isEmpty} ? 'green' : 'red')">
+									<span th:text="${r.isEmpty ? 'Yes' : 'No'}"></span>
+								</td>
+								<td th:text="${r.roomsize}"></td>
+								<th th:text="${r.pricepernight}" class="text-success"></th>
+								<td th:text="${r.roomType}"></td>
+								<td th:text="${r.floor}"></td>
+								<td th:style="'color: ' + (${r.status == 'Occupied'} ? 'green' :
+                                                   (${r.status == 'Not Occupied'} ? 'red' : 'gray'))">
+									<span th:text="${r.status}"></span>
+								</td>
+								<td><a th:href="@{/updateRoom/{id}(id=${r.id})}" th:disabled="${r.status == 'Occupied'}"><button class="btn btn-outline-warning" th:attr="disabled=${r.status == 'Occupied'}">Update</button></a></td>
+								<td><a th:href="@{'/remove/' + ${r.id}}" th:disabled="${r.status == 'Occupied'}"><button class="btn btn-outline-danger" th:attr="disabled=${r.status == 'Occupied'}">Delete</button></a></td>
+							</tr>
+						</tbody>
+					</table>
+	</div>
+</body>
+</html>
