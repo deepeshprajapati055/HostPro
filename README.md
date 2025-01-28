@@ -56,3 +56,10 @@ The application will be available at `http://localhost:9092`
 
 Feel free to fork the repository and submit pull requests.
 
+![Image](https://github.com/user-attachments/assets/132bde1e-b69f-492a-b556-b14e678584dc)
+## 
+![Image](https://github.com/user-attachments/assets/ecf03157-5c0a-4ed4-bdb7-a86b1dd5d04e)
+## 
+![Image](https://github.com/user-attachments/assets/8a604b9e-d29d-4c4b-b48f-86ba5b85b991)
+
+
